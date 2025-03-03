@@ -9,60 +9,60 @@ import cake6 from "/src/assets/images/56.jpeg";
 import cake7 from "/src/assets/images/57.jpeg";
 import cake8 from "/src/assets/images/58.jpeg";
 import cake9 from "/src/assets/images/55.webp";
-
-
-
-// import { FaSearch } from "react-icons/fa";
+import img1 from "../assets/images/48.jpeg";
+import img2 from "../assets/images/44.jpeg";
+import img3 from "../assets/images/43.jpeg";
+import img4 from "../assets/images/20 Fun Baby.jpeg";
+import img5 from "../assets/images/29.jpeg";
+import img6 from "../assets/images/18.jpeg";
+import img7 from "../assets/images/45.jpeg";
+import img8 from "../assets/images/27.jpeg";
+import img9 from "../assets/images/41.jpeg";
+import img10 from "../assets/images/42.jpeg";
+import img11 from "../assets/images/24.jpeg";
+import img12 from "../assets/images/37.jpeg";
+import { EnquiryForm } from "./EnquiryForm";
+import { SearchBar } from "./searchBar";
 
 const cakeImages = [cake1, cake2, cake3, cake4, cake5, cake6,cake7,cake8,cake9];
+const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12];
 
 export default function Home() {
   
   const sliderRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
 
-  const handleMouseDown = (e) => {
-    setIsDragging(true);
-    setStartX(e.clientX);
-    setScrollLeft(sliderRef.current.scrollLeft);
-  };
-
+  const handleMouseDown = () => setIsDragging(true);
+  const handleMouseUp = () => setIsDragging(false);
   const handleMouseMove = (e) => {
     if (!isDragging) return;
-    const walk = (e.clientX - startX) * 1.5; 
-    sliderRef.current.scrollLeft = scrollLeft - walk;
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
+    sliderRef.current.scrollLeft -= e.movementX;
   };
 
 
   return (
-    <div className="font-[Roboto] bg-pink-200 min-h-screen">
+    <div className="font-[Roboto] min-h-screen">
+      <SearchBar />
         <div
         ref={sliderRef}
-        className={`p-4 flex gap-6 select-none overflow-hidden ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
+        className={`p-4 flex gap-6 select-none overflow-hidden ${
+          isDragging ? "cursor-grabbing" : "cursor-grab"
+        }`}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp} 
+        onMouseLeave={handleMouseUp}
       >
-        {[
-          "48.jpeg", "44.jpeg", "43.jpeg", "20 Fun Baby.jpeg",
-          "29.jpeg", "18.jpeg", "45.jpeg", "27.jpeg",
-          "41.jpeg", "42.jpeg", "24.jpeg", "37.jpeg"
-        ].map((image, index) => (
+        {images.map((image, index) => (
           <img
             key={index}
-            src={`src/assets/images/${image}`}
+            src={image}
             alt="Cake"
             className="h-100 w-[270px] object-cover rounded-2xl flex-shrink-0"
           />
         ))}
       </div>
+
 
       
       
@@ -75,42 +75,34 @@ export default function Home() {
       </div>
       
       <h2 className="text-4xl text-[#5D4037] text-center my-8 font-bold underline">IN VOGUE</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 p-4">
-        {["BISCOFF DRIP CAKE", "RASPBERRY CHEESECAKE", "RASAMALAI CAKE", "ELANEER PUDDING", "LEMON CAKE", "FERRERO ROCHER CAKE", "KUNAFA CHOCOLATE", "ROSE MILK CAKE", "CHOCO DREAM CAKE"].map((item, index) => (
-          <div key={index} className="p-2 rounded overflow-hidden transform transition-transform duration-300 hover:scale-105 group">
-            <div className="relative overflow-hidden">
-              <img src={cakeImages[index]} alt={item} className="h-80 w-[350px] object-cover rounded transform transition-transform duration-500 group-hover:scale-110" />
-              <div className="bg-[#5D4037] py-4 w-[350px] absolute bottom-0 left-0 transform transition-transform duration-500 group-hover:translate-x-4 group-hover:-translate-y-0">
-                <h3 className="text-center text-2xl text-white font-bold transition-transform duration-500 group-hover:translate-x-4">{item}</h3>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
+  {[
+    "BISCOFF DRIP CAKE", "RASPBERRY CHEESECAKE", "RASAMALAI CAKE",
+    "ELANEER PUDDING", "LEMON CAKE", "FERRERO ROCHER CAKE",
+    "KUNAFA CHOCOLATE", "ROSE MILK CAKE", "CHOCO DREAM CAKE"
+  ].map((item, index) => (
+    <div key={index} className="p-2 rounded overflow-hidden transform transition-transform duration-300 hover:scale-105 group">
+      <div className="relative overflow-hidden">
 
-
-<div className="bg-[#F3C6C6] p-8 rounded-lg shadow-inner max-w-6xl mx-auto mt-8 border border-[#5D4037]">
-  <h2 className="text-center text-2xl font-bold text-[#5D4037]">ENQUIRY FORM</h2>
-  <p className="text-center text-sm text-gray-700 mt-2">
-    Let Us Know About Your Taste!! We Will Customize It Without Any Compromise!!
-  </p>
-
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-    <input type="text" placeholder="Name" className="p-3 bg-white font-semibold border border-gray-300 rounded-lg w-full" />
-    <input type="text" placeholder="Egg/Eggless" className="p-3 bg-white border font-semibold border-gray-300 rounded-lg w-full" />
-    <input type="text" placeholder="Contact" className="p-3 bg-white border font-semibold border-gray-300 rounded-lg w-full" />
-    <input type="text" placeholder="Which Flour To Be Used?" className="p-3 font-semibold bg-white border border-gray-300 rounded-lg w-full" />
-
-    <input type="email" placeholder="Mail ID" className="p-3 bg-white border font-semibold border-gray-300 rounded-lg" />
-    <textarea placeholder="Type Your Customization" className="p-3 bg-white font-semibold border border-gray-300 rounded-lg w-full" ></textarea>
-
-    <input type="text" placeholder="Occasion" className="p-3 bg-white border font-semibold border-gray-300 rounded-lg w-full" />
-  </div>
-
-  <button className="block bg-[#5D4037] text-white px-6 py-2 rounded-full mt-6 mx-auto font-bold">
-    CONVEY US
-  </button>
+        <img
+          src={cakeImages[index]}
+          alt={item}
+          className="h-80 w-full object-cover rounded transform transition-transform duration-500 ease-in-out group-hover:scale-110"
+        />
+        <div className="bg-[#5D4037] py-4 w-full absolute bottom-0 left-0">
+          <h3 className="text-center text-xl sm:text-2xl text-white font-bold transform transition-all duration-500 ease-in-out group-hover:translate-x-4 group-hover:scale-105">
+            {item}
+          </h3>
+        </div>
+      </div>
+    </div>
+  ))}
 </div>
+
+       <EnquiryForm/>
+
+
+
 
 
     </div>
