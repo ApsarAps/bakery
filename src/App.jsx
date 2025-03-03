@@ -8,7 +8,7 @@ import { Pastries } from "./component/Pastries";
 import { BreadDesserts } from "./component/BreadDesserts";
 import { Beverages } from "./component/Beverages";
 import { OurIdentity } from "./component/OurIdentity";
-import { Reachout } from "./Reachout";
+import { Reachout } from "./component/Reachout";
 
 
 function App() {
